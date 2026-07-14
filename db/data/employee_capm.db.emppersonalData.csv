@@ -1,0 +1,11 @@
+Id,empId,empFirstName,empLastName,empEmail,empPhoneNumber,empService,empgender
+9d4b6c8f-8d5f-4d3e-a9a1-001122334455,1001,Ram,Kumar,ram.kumar@company.com,9876543210,SERVICE,MALE
+3c2a9f71-6c44-4b7d-b8d2-112233445566,1002,Sita,Reddy,sita.reddy@company.com,9876543211,SERVICE,FEMALE
+7e1f4d92-1a8d-4c5f-93c8-223344556677,1003,Ravi,Sharma,ravi.sharma@company.com,9876543212,RETIRED,MALE
+1b5c7d83-3f9e-45a7-b2c1-334455667788,1004,Priya,Nair,priya.nair@company.com,9876543213,SERVICE,FEMALE
+2d8e6f74-5b1a-42e8-94f3-445566778899,1005,Arjun,Patel,arjun.patel@company.com,9876543214,RETIRED,MALE
+4f9a1b65-7c2d-4a9b-a5d6-556677889900,1006,Anjali,Verma,anjali.verma@company.com,9876543215,SERVICE,FEMALE
+6a3d8c57-9e4f-47d2-b7a8-667788990011,1007,Vikram,Singh,vikram.singh@company.com,9876543216,SERVICE,MALE
+8c5e2a49-1f6b-4e8c-c9d0-778899001122,1008,Meena,Iyer,meena.iyer@company.com,9876543217,RETIRED,FEMALE
+5b7f3d91-2a8c-4f6e-d1e2-889900112233,1009,Kiran,Rao,kiran.rao@company.com,9876543218,SERVICE,MALE
+0e9d4b82-6f3a-41c7-e4f5-990011223344,1010,Deepa,Menon,deepa.menon@company.com,9876543219,RETIRED,FEMALE
