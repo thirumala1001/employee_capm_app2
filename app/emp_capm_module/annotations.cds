@@ -1,0 +1,1 @@
+using empPersonalsrv as service from '../../srv/catalogsrv';

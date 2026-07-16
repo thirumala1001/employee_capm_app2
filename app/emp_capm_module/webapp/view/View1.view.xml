@@ -1,0 +1,71 @@
+<mvc:View controllerName="empcapmmodule.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Table items="{empModel>/empPersonalSet}" id="idemptable" mode="SingleSelectLeft" selectionChange="onSelectItemPress">
+                <columns>
+                    <Column>
+                        <Label text="Employee ID" />
+                    </Column>
+                    <Column>
+                        <Label text="Name" />
+                    </Column>
+                    <Column>
+                        <Label text="Date Of Birth" />
+                    </Column>
+                    <Column>
+                        <Label text="Join Date" />
+                    </Column>
+                    <Column>
+                        <Label text="Employee Email" />
+                    </Column>
+                    <Column>
+                        <Label text="Contact Number" />
+                    </Column>
+                    <Column>
+                        <Label text="Service / Retired" />
+                    </Column>
+                    <Column>
+                        <Label text="Gender" />
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem type="Navigation" press="OnLineItemPress">
+                        <cells>
+                            <Text text="{empModel>empId}" />
+                            <Text text="{empModel>empFirstName} {empModel>empLastName}" />
+                            <Text text="{path:'empModel>empDateOfBirth', formatter: '.onDateOfBirthFormatChange'}" />
+                            <!-- type:'sap.ui.model.type.DateTime', formatOptions:{pattern : 'dd/MM/yyyy'}}" -->
+                            <Text text="{path:'empModel>empDateOfJoining', formatter : '.onDateFormatChange'}" />
+                            <Text text="{empModel>empEmail}" />
+                            <Text text="{empModel>empPhoneNumber}" />
+                            <Text text="{empModel>empService}" />
+                            <Text text="{empModel>empgender}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+            <Dialog id="idMainDialog" contentWidth="20%" showHeader="false" title="Employee Family Details">
+                <content>
+                    <List items="{empFamilyModel>/famrelation}">
+                        <headerToolbar>
+                            <OverflowToolbar >
+                                <Title text="Employee Family Details"></Title>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <StandardListItem title="{empFamilyModel>familyMemberName}" description="{empFamilyModel>relation}" counter="{empFamilyModel>familyMemberAge}"></StandardListItem>
+                    </List>
+                </content>
+                <footer>
+                    <OverflowToolbar >
+                        <ToolbarSpacer ></ToolbarSpacer>
+                        <Button text="Close" press="onClickCloseDialog" type="Emphasized" width="20%" />
+                    </OverflowToolbar>
+                </footer>
+            </Dialog>
+        </content>
+    </Page>
+</mvc:View>

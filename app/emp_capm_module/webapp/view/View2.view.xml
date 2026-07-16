@@ -1,0 +1,35 @@
+<mvc:View controllerName="empcapmmodule.controller.View2"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+        <Page showHeader="false">
+            <content>
+                <Table items="{famrelation}">
+                    <columns>
+                        <Column>
+                            <Text text="Employee Id" />
+                        </Column>
+                        <Column>
+                            <Text text="Name" />
+                        </Column>
+                        <Column>
+                            <Text text="Relation" />
+                        </Column>
+                        <Column>
+                            <Text text="Age" />
+                        </Column>
+                    </columns>
+
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{empId}" />
+                                <Text text="{familyMemberName}" />  
+                                <Text text="{relation}" />
+                                <Text text="{familyMemberAge}" /> 
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </content>
+        </Page>
+</mvc:View>

@@ -3,7 +3,7 @@ using {employee_capm.db as myempModel} from '../db/employeeodatav4';
 // @(path: '/odata/v4/emppersonalsrv') to change the service path, change the value of the path annotation
 service empPersonalsrv @(path: '/odata/v4/emppersonalsrv') {
     // enable the edit button in the object page
-    @odata.draft.enabled
+    // @odata.draft.enabled
     entity empPersonalSet as projection on myempModel.emppersonalData;
 
     entity empServicetypeVHSet as projection on myempModel.empServicetypeVH;
@@ -16,6 +16,7 @@ annotate empPersonalsrv.empPersonalSet with {
     empPhoneNumber @Common.Label: 'Contact Number';
     empService     @Common.Label: 'Service Type';
     empgender      @Common.Label: 'Gender';
+    empDateOfJoining @Common.Label : 'Date Of Joining';
     // empFirstName   @Common.Label: 'First Name';
     // empLastName    @Common.Label: 'Last Name';
     // empEmail       @Common.Label: 'Email';
@@ -37,6 +38,14 @@ annotate empPersonalsrv.empPersonalSet with @(UI: {
             Label: 'Last Name'
         },
         {
+            Value : empDateOfBirth,
+            Label : 'Date of Birth'
+        },
+        {
+            Value : empDateOfJoining,
+            Label : 'Date of Joining'
+        },
+        {
             Value: empEmail,
             Label: 'Email'
         },
@@ -55,6 +64,7 @@ annotate empPersonalsrv.empPersonalSet with @(UI: {
     ],
     SelectionFields             : [
         empId,
+        empDateOfJoining,
         empPhoneNumber,
         empService,
         empgender
@@ -82,7 +92,9 @@ annotate empPersonalsrv.empPersonalSet with @(UI: {
         {Value: empFirstName, Label : 'First Name'},
         {Value: empLastName, Label : 'Last Name'},
         {Value: empService},
-        {Value: empgender}
+        {Value: empgender},
+        {Value: empDateOfBirth, Label : 'Date Of Birth'},
+        {Value : empDateOfJoining}
     ]},
     FieldGroup #ContactDetails : {Data: [
         {Value: empEmail, Label : 'Email'},
@@ -94,7 +106,7 @@ annotate empPersonalsrv.empPersonalSet with @(UI: {
 annotate empPersonalsrv.empPersonalSet with {
     empgender @(
         Common.ValueList: {
-            CollectionPath: 'employeeGenderVHSet',
+            CollectionPath: 'employeeGenderVH', //employeeGenderVHSet
             Label : 'Gender',
             Parameters: [
                 {
@@ -111,7 +123,7 @@ annotate empPersonalsrv.empPersonalSet with {
     );
     empService @(
         Common.ValueList :{
-            CollectionPath:'empServicetypeVHSet',
+            CollectionPath:'empServicetypeVH', //empServicetypeVHSet
             Parameters:[
                 {
                     $Type : 'Common.ValueListParameterInOut',

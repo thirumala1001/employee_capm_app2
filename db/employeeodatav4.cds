@@ -17,8 +17,11 @@ entity emppersonalData {
     empLastName : String(50);
     empEmail : String(100);
     empPhoneNumber : String(20);
+    empDateOfBirth : DateTime;
+    empDateOfJoining : DateTime;
     empService : empServiceType;
     empgender : employeeGender;
+    famrelation : Composition of many empFamilyMemberData on famrelation.famComposation = $self
 }
 
 entity empServicetypeVH {
@@ -29,4 +32,13 @@ entity empServicetypeVH {
 entity employeeGenderVH {
     key code : String;
     text : String;
+}
+
+entity empFamilyMemberData {
+    key famId : UUID;
+    empId : Integer;
+    relation : String(50);
+    familyMemberName : String(100);
+    familyMemberAge : Integer;
+    famComposation : Association to emppersonalData;
 }
