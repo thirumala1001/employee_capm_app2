@@ -1,9 +1,54 @@
-<mvc:View controllerName="empcapmmodule.controller.View1"
+<mvc:View
+    xmlns:core="sap.ui.core"
+    controllerName="empcapmmodule.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
         <content>
-            <Table items="{empModel>/empPersonalSet}" id="idemptable" mode="SingleSelectLeft" selectionChange="onSelectItemPress">
+            <Table
+                items="{empModel>/empPersonalSet}"
+                id="idemptable"
+                mode="SingleSelectLeft"
+            >
+                <!-- selectionChange="onSelectItemPress" -->
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="Employee Details" />
+                        <ToolbarSpacer />
+                        <Button
+                            text="Add New Employee"
+                            press="onClickAddNewEmployee"
+                            type="Emphasized"
+                        />
+                        <Button text="Add Family Data"
+                            press="onClickAddNewEmployee"
+                            type="Emphasized"
+                        />
+                        <Button
+                            text="Update Employee"
+                            press="onClickOpenDialog"
+                            type="Default"
+                            class="sapUiTinyMarginBegin"
+                        />
+                        <Button
+                            text="Delete Employee"
+                            press="onClickOpenDeleteDialog"
+                            type="Attention"
+                            class="sapUiTinyMarginBegin"
+                        />
+                        <Button
+                            text="BatchUpdate"
+                            press="_onBatchUpdate"
+                            type="Default"
+                            class="sapUiTinyMarginBegin"
+                            visible="false"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
                 <columns>
                     <Column>
                         <Label text="Employee ID" />
@@ -32,13 +77,22 @@
                 </columns>
 
                 <items>
-                    <ColumnListItem type="Navigation" press="OnLineItemPress">
+                    <ColumnListItem
+                        type="Navigation"
+                        press="OnLineItemPress"
+                    >
                         <cells>
                             <Text text="{empModel>empId}" />
-                            <Text text="{empModel>empFirstName} {empModel>empLastName}" />
-                            <Text text="{path:'empModel>empDateOfBirth', formatter: '.onDateOfBirthFormatChange'}" />
+                            <Text
+                                text="{empModel>empFirstName} {empModel>empLastName}"
+                            />
+                            <Text
+                                text="{path:'empModel>empDateOfBirth', formatter: '.onDateOfBirthFormatChange'}"
+                            />
                             <!-- type:'sap.ui.model.type.DateTime', formatOptions:{pattern : 'dd/MM/yyyy'}}" -->
-                            <Text text="{path:'empModel>empDateOfJoining', formatter : '.onDateFormatChange'}" />
+                            <Text
+                                text="{path:'empModel>empDateOfJoining', formatter : '.onDateFormatChange'}"
+                            />
                             <Text text="{empModel>empEmail}" />
                             <Text text="{empModel>empPhoneNumber}" />
                             <Text text="{empModel>empService}" />
@@ -48,21 +102,371 @@
                 </items>
             </Table>
 
-            <Dialog id="idMainDialog" contentWidth="20%" showHeader="false" title="Employee Family Details">
+            <Dialog
+                id="idMainDialog"
+                contentWidth="20%"
+                showHeader="false"
+                title="Employee Family Details"
+            >
                 <content>
                     <List items="{empFamilyModel>/famrelation}">
                         <headerToolbar>
-                            <OverflowToolbar >
-                                <Title text="Employee Family Details"></Title>
+                            <OverflowToolbar>
+                                <Title text="Employee Family Details" />
                             </OverflowToolbar>
                         </headerToolbar>
-                        <StandardListItem title="{empFamilyModel>familyMemberName}" description="{empFamilyModel>relation}" counter="{empFamilyModel>familyMemberAge}"></StandardListItem>
+                        <StandardListItem
+                            title="{empFamilyModel>familyMemberName}"
+                            description="{empFamilyModel>relation}"
+                            counter="{empFamilyModel>familyMemberAge}"
+                        />
                     </List>
                 </content>
                 <footer>
-                    <OverflowToolbar >
-                        <ToolbarSpacer ></ToolbarSpacer>
-                        <Button text="Close" press="onClickCloseDialog" type="Emphasized" width="20%" />
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            text="Close"
+                            press="onClickCloseDialog"
+                            type="Emphasized"
+                            width="20%"
+                        />
+                    </OverflowToolbar>
+                </footer>
+            </Dialog>
+
+            <Dialog
+                id="idAddNewEmployeeDialog"
+                contentWidth="40%"
+                title="Add New Employee"
+            >
+                <content>
+                    <VBox
+                        width="100%"
+                        alignItems="Center"
+                    >
+                        <VBox
+                            class="sapUiSmallMargin"
+                            width="60%"
+                        >
+                            <HBox justifyContent="SpaceBetween">
+                                <Label
+                                    text="Employee ID:-"
+                                    class="sapUiTinyMarginTop"
+                                />
+                                <Input
+                                    value=""
+                                    id="idEmployeeId"
+                                />
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label
+                                    text="Employee First Name:-"
+                                    class="sapUiTinyMarginTop"
+                                />
+                                <Input
+                                    value=""
+                                    id="idFirstName"
+                                />
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label
+                                    text="Employee Last Name:-"
+                                    class="sapUiTinyMarginTop"
+                                />
+                                <Input
+                                    value=""
+                                    id="idLastName"
+                                />
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label
+                                    text="Email Id:-"
+                                    class="sapUiTinyMarginTop"
+                                />
+                                <Input
+                                    value=""
+                                    type="Email"
+                                    id="idEmail"
+                                />
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label
+                                    text="Contact Number:-"
+                                    class="sapUiTinyMarginTop"
+                                />
+                                <Input
+                                    value=""
+                                    type="Number"
+                                    id="idContactNumber"
+                                />
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label
+                                    text="Date of Birth:-"
+                                    class="sapUiTinyMarginTop"
+                                />
+                                <DatePicker
+                                    displayFormat="dd/MM/yyyy"
+                                    valueFormat="dd/mm/yyyy"
+                                    id="idDateOfBirth"
+                                    class="datepickerclass"
+                                />
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label
+                                    text="Date of Joining:-"
+                                    class="sapUiTinyMarginTop"
+                                />
+                                <DatePicker
+                                    displayFormat="dd/MM/yyyy"
+                                    valueFormat="dd/mm/yyyy"
+                                    id="idJoinDate"
+                                    class="datepickerclass"
+                                />
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label
+                                    text="Service Type:-"
+                                    class="sapUiTinyMarginTop"
+                                />
+                                <ComboBox
+                                    id="idService"
+                                    class="datepickerclass"
+                                >
+                                    <core:Item
+                                        key="SERVICE"
+                                        text="Service"
+                                    />
+                                    <core:Item
+                                        key="RETIRED"
+                                        text="Retired"
+                                    />
+                                </ComboBox>
+                            </HBox>
+                            <HBox justifyContent="SpaceBetween">
+                                <Label
+                                    text="Gender:-"
+                                    class="sapUiTinyMarginTop"
+                                />
+                                <ComboBox
+                                    id="idGender"
+                                    class="datepickerclass"
+                                >
+                                    <core:Item
+                                        key="MALE"
+                                        text="Male"
+                                    />
+                                    <core:Item
+                                        key="FEMALE"
+                                        text="Female"
+                                    />
+                                </ComboBox>
+                            </HBox>
+                        </VBox>
+
+                        <Table items="{oFamilyModel>/familyRelation}">
+                            <headerToolbar>
+                                <OverflowToolbar>
+                                    <Title text="Employee Family Details" />
+                                    <ToolbarSpacer />
+                                    <Button
+                                        text="Add Family Member"
+                                        press="onClickAddFamilyMember"
+                                        type="Attention"
+                                    />
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column>
+                                    <Text text="Employee Id" />
+                                </Column>
+                                <Column>
+                                    <Text text="Family Member Name" />
+                                </Column>
+                                <Column>
+                                    <Text text="Relation" />
+                                </Column>
+                                <Column>
+                                    <Text text="Age" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem>
+                                    <cells>
+                                        <Input value="{oFamilyModel>empId}" />
+                                        <Input
+                                            value="{oFamilyModel>familyMemberName}"
+                                        />
+                                        <Input
+                                            value="{oFamilyModel>relation}"
+                                        />
+                                        <Input
+                                            value="{oFamilyModel>familyMemberAge}"
+                                        />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </VBox>
+                </content>
+                <footer>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            text="Add"
+                            press="onClickAddEmployee"
+                            type="Emphasized"
+                            width="20%"
+                        />
+                        <Button
+                            text="Close"
+                            press="onClickCloseDialog"
+                            type="Reject"
+                            width="20%"
+                        />
+                    </OverflowToolbar>
+                </footer>
+            </Dialog>
+
+            <Dialog
+                id="idUpdateEmployeeDialog"
+                contentWidth="20%"
+                title="Update Employee"
+            >
+                <content>
+                    <VBox class="sapUiSmallMargin">
+                        <HBox justifyContent="SpaceBetween">
+                            <Label
+                                text="Employee ID:-"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <Input
+                                value=""
+                                id="idDelEmployeeId"
+                            />
+                        </HBox>
+                        <HBox justifyContent="SpaceBetween">
+                            <Label
+                                text="Employee First Name:-"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <Input
+                                value=""
+                                id="idDelFirstName"
+                            />
+                        </HBox>
+                        <HBox justifyContent="SpaceBetween">
+                            <Label
+                                text="Employee Last Name:-"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <Input
+                                value=""
+                                id="idDelLastName"
+                            />
+                        </HBox>
+                        <HBox justifyContent="SpaceBetween">
+                            <Label
+                                text="Email Id:-"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <Input
+                                value=""
+                                type="Email"
+                                id="idDelEmail"
+                            />
+                        </HBox>
+                        <HBox justifyContent="SpaceBetween">
+                            <Label
+                                text="Contact Number:-"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <Input
+                                value=""
+                                type="Number"
+                                id="idDelContactNumber"
+                            />
+                        </HBox>
+                        <HBox justifyContent="SpaceBetween">
+                            <Label
+                                text="Date of Birth:-"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <DatePicker
+                                displayFormat="dd/MM/yyyy"
+                                valueFormat="dd/mm/yyyy"
+                                id="idDelDateOfBirth"
+                                class="datepickerclass"
+                            />
+                        </HBox>
+                        <HBox justifyContent="SpaceBetween">
+                            <Label
+                                text="Date of Joining:-"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <DatePicker
+                                displayFormat="dd/MM/yyyy"
+                                valueFormat="dd/mm/yyyy"
+                                id="idDelJoinDate"
+                                class="datepickerclass"
+                            />
+                        </HBox>
+                        <HBox justifyContent="SpaceBetween">
+                            <Label
+                                text="Service Type:-"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <ComboBox
+                                id="idDelService"
+                                class="datepickerclass"
+                            >
+                                <core:Item
+                                    key="SERVICE"
+                                    text="Service"
+                                />
+                                <core:Item
+                                    key="RETIRED"
+                                    text="Retired"
+                                />
+                            </ComboBox>
+                        </HBox>
+                        <HBox justifyContent="SpaceBetween">
+                            <Label
+                                text="Gender:-"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <ComboBox
+                                id="idDelGender"
+                                class="datepickerclass"
+                            >
+                                <core:Item
+                                    key="MALE"
+                                    text="Male"
+                                />
+                                <core:Item
+                                    key="FEMALE"
+                                    text="Female"
+                                />
+                            </ComboBox>
+                        </HBox>
+                    </VBox>
+                </content>
+                <footer>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            text="Update"
+                            press="onClickUpdateEmployee"
+                            type="Emphasized"
+                            width="20%"
+                        />
+                        <Button
+                            text="Close"
+                            press="onClickUpdateDialog"
+                            type="Reject"
+                            width="20%"
+                        />
                     </OverflowToolbar>
                 </footer>
             </Dialog>
