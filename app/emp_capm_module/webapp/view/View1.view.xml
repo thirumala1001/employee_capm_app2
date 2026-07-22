@@ -80,6 +80,7 @@
                     <ColumnListItem
                         type="Navigation"
                         press="OnLineItemPress"
+                        highlight="{path:'empModel>empgender', formatter: '.onRowColorChange'}"
                     >
                         <cells>
                             <Text text="{empModel>empId}" />
@@ -95,8 +96,11 @@
                             />
                             <Text text="{empModel>empEmail}" />
                             <Text text="{empModel>empPhoneNumber}" />
-                            <Text text="{empModel>empService}" />
-                            <Text text="{empModel>empgender}" />
+                            <!-- <Text text="{empModel>empService}" /> -->
+                            <ObjectStatus text="{= ${empModel>empService} === 'SERVICE' ? 'Service' : 'Retired'}" inverted="true" state="{= ${empModel>empService} === 'SERVICE' ? 'Success': 'Error'}"></ObjectStatus>
+                            <!-- <Text text="{path:'empModel>empgender', formatter : '.onGenderFormatChange'}" /> -->
+                            <!-- <Text text="{=${empModel>empgender} === 'MALE'? 'Male' : ${empModel>empgender} === 'FEMALE'? 'Female' : 'Other'}" /> -->
+                            <core:Icon src="{=${empModel>empgender} === 'MALE' ? 'sap-icon://male' : ${empModel>empgender} === 'FEMALE'? 'sap-icon://female' : 'sap-icon://gender-male-and-female'}" color="{path:'empModel>empgender', formatter :'.formatColorChange'}"></core:Icon>
                         </cells>
                     </ColumnListItem>
                 </items>

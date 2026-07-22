@@ -86,7 +86,7 @@
           "earlyRequests": true,
           "groupId": "$auto",
           "updateGroupId": "empcrudcapm"
-        }
+        }  
       }
     },
     "resources": {

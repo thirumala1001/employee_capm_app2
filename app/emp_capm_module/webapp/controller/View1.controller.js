@@ -18,6 +18,7 @@ sap.ui.define([
             }
             var oFamilyModel = new sap.ui.model.json.JSONModel(oFamliyData);
             this.getView().setModel(oFamilyModel, "oFamilyModel");
+            
             var oModel = this.getOwnerComponent().getModel();
             this.getView().setModel(oModel, "empModel");
             var oTable = this.getView().byId("idemptable");
@@ -386,5 +387,39 @@ sap.ui.define([
             oData.push(obj);
             oModel.setProperty("/familyRelation", oData);
         },
+        onGenderFormatChange:function(oGenderValue){
+            if(oGenderValue === "MALE"){
+                return "Male";
+            }else if(oGenderValue === "FEMALE"){
+                return "Female";
+            }else{
+                return "Other";
+            }
+        },
+        formatColorChange:function(oCol){
+            switch(oCol){
+                case 'MALE' : return 'Positive';
+                case 'FEMALE' :return 'Critical';
+                default : return 'Neutral';
+            }
+        },
+        onRowColorChange:function(oRowCol){
+            switch(oRowCol){
+                case 'MALE' : return 'Success';
+                case 'FEMALE' :return 'Warning';
+                default : return 'Error';
+            }
+        },
+        formatDateoFBirth:function(oDateValue){
+            if(!oDateValue){
+                return "Date of Birth Not Available";
+            }
+            var oDateval = sap.ui.core.format.DateFormat.getInstace({
+                pattern : 'dd/MM/yyyy'
+            });
+            return oDateval.format(new Date(oDateval)); 
+
+            // retun new Date(oDateValue).toLocaleDateString('en-GB');
+        }
     });
 });
